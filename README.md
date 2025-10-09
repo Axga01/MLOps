@@ -10,28 +10,28 @@ El pipeline facilita la reproducibilidad completa del experimento, desde los dat
 ```
 .
 ├── data/
-│   ├── raw/                         # Datos originales (no modificados)
-│   ├── processed/                   # Datos limpios y transformados
+│   ├── raw/                         # Datos originales con modificaciones del equipo docente.
+│   ├── target/                      # Datos originales de la fuente. NO utilizados.
+│   ├── processed/                   # Datos limpios y transformados.
 │   ├── prepared/                    # Conjuntos de entrenamiento y prueba
 │   │   └── a01313663/
 │   │       └── class_distribution.csv  # Estadísticas de distribución de clases (no versionado en DVC)
 ├── src/
 │   └── scripts/a01313663/           # Scripts Python del pipeline
 │       ├── 01_cleaning.py
-│       ├── 02_preprocessing.py
-│       ├── 03_training.py
-│       ├── 04_evaluation.py
-│       └── 05_reporting.py
+│       ├── 02_eda.py                # Autogenerado a partir de Notebook - NO SE USA EN PIPELINE DVC.
+│       ├── 02_eda_manual.py
+│       ├── 03_preprocessing.py
+│       └── 04_training.py
 ├── reports/
 │   └── a01313663/
 │       ├── figures/                 # Gráficos y resultados del EDA
-│       ├── model_comparison.csv
-│       ├── final_model_comparison.csv
-│       └── confusion_matrix.png
+│       ├── model_comparison.csv     # Resultados de la primera ejecución del modelo 
+│       ├── final_model_comparison.csv  # Resultados con las ejecuciones con hiperparámetros variables
+│       ├── confusion_matrix.csv     # Matriz de confusión en formato texto
+│       └── confusion_matrix.png     # Matriz de confusión en formato gráfico
 ├── dvc.yaml                         # Definición de las etapas del pipeline
 ├── dvc.lock                         # Registro automático de hashes y dependencias
-├── params.yaml                      # Parámetros del experimento
-├── requirements.txt                 # Dependencias de Python
 ├── .dvc/                            # Metadatos internos de DVC
 └── .gitignore
 ```
@@ -51,8 +51,8 @@ El pipeline facilita la reproducibilidad completa del experimento, desde los dat
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/usuario/obesity-estimation-pipeline.git
-   cd obesity-estimation-pipeline
+   git clone https://github.com/TecMNA2025MLOpsEq25/mna-mlops-sep2025-eq25.git
+   cd mna-mlops-sep2025-eq25
    ```
 
 2. Crea y activa un entorno virtual:
@@ -66,7 +66,7 @@ El pipeline facilita la reproducibilidad completa del experimento, desde los dat
 3. Instala las dependencias:
 
    ```bash
-   pip install -r requirements.txt
+   pip install [dependencias]
    ```
 
 4. Asegúrate de tener configurado **DVC**:
@@ -137,6 +137,7 @@ Los resultados principales del pipeline se encuentran en:
 
 - `reports/a01313663/model_comparison.csv`  
 - `reports/a01313663/final_model_comparison.csv`  
+- `reports/a01313663/confusion_matrix.csv`  
 - `reports/a01313663/confusion_matrix.png`  
 - `reports/a01313663/figures/` (EDA y análisis exploratorio)
 
