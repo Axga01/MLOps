@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 # ### **Tecnológico de Monterrey**
 # 
@@ -34,7 +32,6 @@
 # **Construcción, ajuste y evaluación de Modelos de Machine Learning**
 # **Tarea**: Construir, ajustar y evaluar modelos de Machine Learning utilizando técnicas y algoritmos apropiados al problema.
 
-# In[1]:
 
 
 # --- Inicialización --- #
@@ -54,12 +51,14 @@ import joblib
 import mlflow
 import numpy as np
 import os
+import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 import warnings
 
 
 # Configuración inicial
-DATA_DIR = "../../data/prepared/a01313663"
+DATA_DIR = "data/prepared/a01313663"
 MLFLOW_TRACKING_URI = "mlruns"
 EXPERIMENT_NAME = "Obesity_Classification"
 
@@ -84,7 +83,6 @@ print("Datos cargados correctamente:")
 print(f"Train: {X_train.shape}, Test: {X_test.shape}")
 
 
-# In[2]:
 
 
 # --- Código utilitario --- #
@@ -155,7 +153,6 @@ def run_experiment(model, model_name, X_train, X_test, y_train, y_test, params=N
 
 # ### Modelado
 
-# In[3]:
 
 
 # --- Modelo base y ejecución inicial --- #
@@ -174,10 +171,10 @@ for name, model in models.items():
     results.append({"Modelo": name, **metrics})
 
 results_df = pd.DataFrame(results).sort_values(by="accuracy", ascending=False)
-display(results_df)
+print(results_df)
+results_df.to_csv("reports/a01313663/model_comparison.csv", index=False)
 
 
-# In[4]:
 
 
 # --- Ajuste de Hiperparámetros --- #
@@ -229,7 +226,6 @@ for name, model in models.items():
         mlflow.sklearn.log_model(grid.best_estimator_, name="model", input_example=input_example, signature=signature)
 
 
-# In[ ]:
 
 
 # --- Guardar el mejor modelo --- #
@@ -243,19 +239,34 @@ for name, model in best_models.items():
     final_results.append({"Modelo": name, **metrics})
 
 final_df = pd.DataFrame(final_results).sort_values(by="f1_macro", ascending=False)
-display(final_df)
+print(final_df)
+final_df.to_csv("reports/a01313663/final_model_comparison.csv", index=False)
 
 best_model_name = final_df.iloc[0]["Modelo"]
 best_model = best_models[best_model_name]
 print(f"\nMejor modelo final: {best_model_name}")
 
-os.makedirs("../../models/a01313663", exist_ok=True)
-joblib.dump(best_model, f"../../models/a01313663/best_model.pkl")
+os.makedirs("models/a01313663", exist_ok=True)
+joblib.dump(best_model, f"models/a01313663/best_model.pkl")
 print(f"Modelo guardado en: /models/a01313663/best_model.pkl")
 
 # Matriz de confusión
 cm = confusion_matrix(y_test, best_model.predict(X_test))
 cm_df = pd.DataFrame(cm, index=best_model.classes_, columns=best_model.classes_)
 print("\nMatriz de Confusión:")
-display(cm_df)
+plt.figure(figsize=(8,6))
+sns.heatmap(cm_df, annot=True, fmt="d", cmap="Blues")
+plt.title(f"Matriz de Confusión - {best_model_name}")
+plt.ylabel("Real")
+plt.xlabel("Predicho")
 
+confusion_path = "reports/a01313663/confusion_matrix.png"
+plt.savefig(confusion_path)
+plt.close()
+
+print(f"Matriz de confusión guardada en: {confusion_path}")
+cm_df.to_csv("reports/a01313663/confusion_matrix.csv")
+
+
+if __name__ == '__main__':
+    pass  # main guard added

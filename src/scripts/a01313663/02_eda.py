@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 # ### **Tecnológico de Monterrey**
 # 
@@ -34,7 +32,6 @@
 # **Construcción, ajuste y evaluación de Modelos de Machine Learning**
 # **Tarea**: Construir, ajustar y evaluar modelos de Machine Learning utilizando técnicas y algoritmos apropiados al problema.
 
-# In[1]:
 
 
 # --- Importaciones e inicializaciones --- #
@@ -42,7 +39,6 @@
 from pandas.api.types import CategoricalDtype
 
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
 
@@ -52,11 +48,10 @@ pd.set_option('display.max_rows', 20)
 pd.set_option('display.float_format', lambda x: f'{x:.3f}')
 
 # Configuración visual
-sns.set(style='whitegrid', palette='muted', context='notebook')
+sns.set_theme(style='whitegrid', palette='muted', context='notebook')
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
-# In[2]:
 
 
 # --- Cargar Dataset --- #
@@ -68,18 +63,16 @@ print('Dataset de trabajo (df)', df.shape)
 # ### Exploración inicial
 # Revisar información general, tipos de datos, primeros registros y estadísticas descriptivas.
 
-# In[3]:
 
 
 # --- Revisión inicial --- #
 
 print(df.dtypes)
-df.head()
+print(df.head())
 
 
 # ### Clasificación de Columnas
 
-# In[4]:
 
 
 # --- Separar columnas por tipo --- #
@@ -103,25 +96,23 @@ print(f'Variables Objetivo: {target_col}')
 
 # ### Estadísticas Descriptivas
 
-# In[5]:
 
 
 # --- Estadísticas descriptivas de las columnas --- #
 
 print("\n--- Estadísticas numéricas ---")
-display(df[numeric_cols].describe())
+print(df[numeric_cols].describe())
 
 print("\n--- Estadísticas categóricas ---")
-display(df[object_cols].describe())
+print(df[object_cols].describe())
 
 print("\n--- Estadísticas binarias ---")
-display(df[binary_cols].astype('object').describe())
+print(df[binary_cols].astype('object').describe())
 
 
 # ### Inspección Visual
 # Visualización de los datos por tipo de columna
 
-# In[6]:
 
 
 # --- Visualización de las columnas numéricas --- #
@@ -143,7 +134,6 @@ for col in numeric_cols:
     plt.show()
 
 
-# In[7]:
 
 
 # --- Heatmap de columnas numéricas --- #
@@ -154,7 +144,6 @@ plt.title("Matriz de correlación")
 plt.show()
 
 
-# In[8]:
 
 
 # --- Pairplot de columnas numéricas --- #
@@ -164,7 +153,6 @@ plt.suptitle("Pairplot de variables numéricas", y=1.02, fontsize=14, fontweight
 plt.show()
 
 
-# In[9]:
 
 
 # --- Visualización de las columnas de texto --- #
@@ -208,7 +196,6 @@ for col in object_cols:
     plt.show()
 
 
-# In[10]:
 
 
 # --- Visualización de las columnas binarias --- #
@@ -251,7 +238,6 @@ plt.tight_layout()
 plt.show()
 
 
-# In[11]:
 
 
 # --- Buscando correlación entre las variables numéricas y las binarias --- #
@@ -278,7 +264,6 @@ for num_col in numeric_cols:
     plt.show()
 
 
-# In[12]:
 
 
 # --- Buscando correlación entre las variables numéricas y categóricas con la variable objetivo --- #
@@ -346,3 +331,6 @@ for col in object_cols_no_target:
     plt.tight_layout()
     plt.show()
 
+
+if __name__ == '__main__':
+    pass  # main guard added

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 # ### **Tecnológico de Monterrey**
 # 
@@ -34,7 +32,6 @@
 # **Construcción, ajuste y evaluación de Modelos de Machine Learning**
 # **Tarea**: Construir, ajustar y evaluar modelos de Machine Learning utilizando técnicas y algoritmos apropiados al problema.
 
-# In[1]:
 
 
 # --- Importaciones e inicializaciones --- #
@@ -43,37 +40,33 @@ import pandas as pd
 import numpy as np
 
 
-# In[2]:
 
 
 # --- Cargar Dataset --- #
 
-df = pd.read_csv('../../data/raw/obesity_estimation_modified.csv')
+df = pd.read_csv('data/raw/obesity_estimation_modified.csv')
 print('Dataset de trabajo (df)', df.shape)
 
 
 # ### Exploración inicial
 # Revisar información general, tipos de datos, primeros registros y estadísticas descriptivas.
 
-# In[3]:
 
 
 # --- Revisión inicial --- #
 
-df.head()
+print(df.head())
 
 
-# In[4]:
 
 
 # Información general y tipos
-df.info()
+print(df.info())
 
 
 # ### Correcciones
 # Removemos columnas sin valor, corregimos datos en columnas, removemos valores atípicos obvios, imputamos valores faltantes.
 
-# In[5]:
 
 
 # --- Remover columna mixed_type_col ---#
@@ -85,10 +78,9 @@ df.info()
 df.drop(columns=['mixed_type_col'], axis=1, inplace=True)
 
 # Confirmamos que la columna fue removida
-df.head()
+print(df.head())
 
 
-# In[6]:
 
 
 # --- Corrección de tipos de datos --- #
@@ -128,7 +120,6 @@ for col in object_cols:
     print(f"{col}: {df[col].unique()[:20]}")
 
 
-# In[7]:
 
 
 # --- Corrección y limpieza --- #
@@ -166,10 +157,9 @@ df.replace({'nan': np.nan, '?': np.nan, 'error': np.nan, 'invalid': np.nan, 'n/a
 
 # Verificar resultados
 print(df.info())
-df.head()
+print(df.head())
 
 
-# In[8]:
 
 
 # --- Validación visual ---#
@@ -190,7 +180,6 @@ for col in object_cols:
     print(f"{col}: {df[col].unique()[:20]}")
 
 
-# In[9]:
 
 
 # --- Filtrado de outliers obvios --- #
@@ -221,7 +210,6 @@ for col in valid_ranges.keys():
     print("----")
 
 
-# In[10]:
 
 
 # --- Imputación de NaN y limpieza final --- #
@@ -260,10 +248,9 @@ print('Nuevas dimensiones del dataset (df)', df.shape)
 # Verificación final
 print("\nInformación final del dataset:")
 print(df.info())
-df.head()
+print(df.head())
 
 
-# In[11]:
 
 
 # --- Guardar versión limpia después del procesamiento realizado --- #
@@ -272,30 +259,34 @@ df.head()
 df_clean = df.copy()
 
 # Y versionamos nuestra copia limpia
-df_clean.to_csv('../../data/processed/a01313663/obesity_estimation_clean.csv', index=False)
+df_clean.to_csv('data/processed/a01313663/obesity_estimation_clean.csv', index=False)
 
 
 # ### Inspección Visual
 # Revisemos las estadísticas por tipo de columna y el conteo de valores nulos por columna.
 
-# In[12]:
 
 
 # --- Estadísticas descriptivas --- #
 
 # Columnas numéricas
-display(df_clean[numeric_cols].describe())
+desc_num = df_clean[numeric_cols].describe()
+print(desc_num)
 
 # Columnas binarias (estadísticas tipo object)
-display(df_clean[binary_cols].astype('object').describe())
+desc_bin = df_clean[binary_cols].astype('object').describe()
+print(desc_bin)
 
 # Columnas de texto
-display(df_clean[object_cols].describe())
+desc_cat = df_clean[object_cols].describe()
+print(desc_cat)
 
 
-# In[13]:
 
 
 # Conteo de nulos por columna
 df_clean.isnull().sum()
 
+
+if __name__ == '__main__':
+    pass  # main guard added

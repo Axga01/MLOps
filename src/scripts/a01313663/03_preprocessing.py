@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 # ### **Tecnológico de Monterrey**
 # 
@@ -34,7 +32,6 @@
 # **Construcción, ajuste y evaluación de Modelos de Machine Learning**
 # **Tarea**: Construir, ajustar y evaluar modelos de Machine Learning utilizando técnicas y algoritmos apropiados al problema.
 
-# In[1]:
 
 
 # --- Inicialización --- #
@@ -50,19 +47,18 @@ import os
 
 # Configuración inicial
 RANDOM_STATE = 42
-DATA_PATH = "../../data/processed/a01313663/obesity_estimation_clean.csv"
-OUTPUT_DIR = "../../data/prepared/a01313663"
+DATA_PATH = "data/processed/a01313663/obesity_estimation_clean.csv"
+OUTPUT_DIR = "data/prepared/a01313663"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Carga del dataset limpio
 df = pd.read_csv(DATA_PATH)
 print(f"Dataset de trabajo (df): {df.shape[0]} filas, {df.shape[1]} columnas")
-df.head()
+print(df.head())
 
 
 # ### Preprocesamiento para modelado
 
-# In[2]:
 
 
 # --- Definiciones --- #
@@ -78,7 +74,6 @@ print("Variable objetivo:", target)
 print("Número de variables predictoras:", X.shape[1])
 
 
-# In[3]:
 
 
 # --- Identificación de tipo de columnas ---#
@@ -89,7 +84,6 @@ print("Numéricas:", num_cols)
 print("Categóricas:", cat_cols)
 
 
-# In[4]:
 
 
 # --- Pipeline de preprocesamiento --- #
@@ -113,7 +107,6 @@ preprocessor = ColumnTransformer(
 )
 
 
-# In[5]:
 
 
 # --- División en conjuntos de entrenamiento, validación y pruebas --- #
@@ -125,7 +118,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 print("Train:", X_train.shape, "Test:", X_test.shape)
 
 
-# In[6]:
 
 
 # --- Aplicar transformaciones y generar datasets finales --- #
@@ -150,7 +142,6 @@ print("Train final:", train_df.shape)
 print("Test final:", test_df.shape)
 
 
-# In[7]:
 
 
 # --- Guardar datasets procesados y el preprocesador, para versionado --- #
@@ -170,7 +161,6 @@ print("-", test_path)
 print("-", preprocessor_path)
 
 
-# In[ ]:
 
 
 # --- Revisión de las proporciones de la variable objetivo en ambos conjuntos --- #
@@ -200,5 +190,8 @@ dist_df = pd.DataFrame({
 dist_df = dist_df.reindex(ordered_classes)
 
 # Mostrar tabla
-dist_df
+dist_df.to_csv(os.path.join(OUTPUT_DIR, "class_distribution.csv"))
 
+
+if __name__ == '__main__':
+    pass  # main guard added
