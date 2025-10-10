@@ -14,22 +14,20 @@ El pipeline facilita la reproducibilidad completa del experimento, desde los dat
 │   ├── target/                      # Datos originales de la fuente. NO utilizados.
 │   ├── processed/                   # Datos limpios y transformados.
 │   ├── prepared/                    # Conjuntos de entrenamiento y prueba
-│   │   └── a01313663/
-│   │       └── class_distribution.csv  # Estadísticas de distribución de clases (no versionado en DVC)
+│   │   └── class_distribution.csv   # Estadísticas de distribución de clases (no versionado en DVC)
 ├── src/
-│   └── scripts/a01313663/           # Scripts Python del pipeline
+│   └── scripts/                     # Scripts Python del pipeline
 │       ├── 01_cleaning.py
 │       ├── 02_eda.py                # Autogenerado a partir de Notebook - NO SE USA EN PIPELINE DVC.
 │       ├── 02_eda_manual.py
 │       ├── 03_preprocessing.py
 │       └── 04_training.py
 ├── reports/
-│   └── a01313663/
-│       ├── figures/                 # Gráficos y resultados del EDA
-│       ├── model_comparison.csv     # Resultados de la primera ejecución del modelo 
-│       ├── final_model_comparison.csv  # Resultados con las ejecuciones con hiperparámetros variables
-│       ├── confusion_matrix.csv     # Matriz de confusión en formato texto
-│       └── confusion_matrix.png     # Matriz de confusión en formato gráfico
+│   └── figures/                     # Gráficos y resultados del EDA
+│   ├── model_comparison.csv         # Resultados de la primera ejecución del modelo 
+│   ├── final_model_comparison.csv   # Resultados con las ejecuciones con hiperparámetros variables
+│   ├── confusion_matrix.csv         # Matriz de confusión en formato texto
+│   └── confusion_matrix.png         # Matriz de confusión en formato gráfico
 ├── dvc.yaml                         # Definición de las etapas del pipeline
 ├── dvc.lock                         # Registro automático de hashes y dependencias
 ├── .dvc/                            # Metadatos internos de DVC
@@ -135,11 +133,11 @@ DVC ejecutará en orden los scripts definidos en `dvc.yaml`, generando los archi
 
 Los resultados principales del pipeline se encuentran en:
 
-- `reports/a01313663/model_comparison.csv`  
-- `reports/a01313663/final_model_comparison.csv`  
-- `reports/a01313663/confusion_matrix.csv`  
-- `reports/a01313663/confusion_matrix.png`  
-- `reports/a01313663/figures/` (EDA y análisis exploratorio)
+- `reports/model_comparison.csv`  
+- `reports/final_model_comparison.csv`  
+- `reports/confusion_matrix.csv`  
+- `reports/confusion_matrix.png`  
+- `reports/figures/` (EDA y análisis exploratorio)
 
 ---
 
