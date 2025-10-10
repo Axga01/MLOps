@@ -9,8 +9,8 @@ stages:
       size: 290776
     - path: src/scripts/a01313663/01_cleaning.py
       hash: md5
-      md5: 181e55652b30d28f8584b6cc8487639f
-      size: 9002
+      md5: 917f70db00898d1c0d92d06601ba8c9b
+      size: 8818
     outs:
     - path: data/processed/a01313663/obesity_estimation_clean.csv
       hash: md5
