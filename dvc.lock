@@ -77,6 +77,10 @@ stages:
       hash: md5
       md5: b5baf33f948dd5f495a5bff5f7c7fd91
       size: 5366888
+    - path: reports/confusion_matrix.csv
+      hash: md5
+      md5: 41c0cd285ec45a816901bec2b323e97c
+      size: 349
     - path: reports/confusion_matrix.png
       hash: md5
       md5: 2088df8df036db78931e6a9d5925fd06
