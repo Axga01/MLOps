@@ -1,2 +1,7 @@
-dvc[azure]
+pandas
 numpy
+scikit-learn
+matplotlib
+seaborn
+dvc
+mlflow
