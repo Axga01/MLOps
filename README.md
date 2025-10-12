@@ -82,7 +82,7 @@ El flujo de trabajo básico es:
 
 ```bash
 # Descargar los datos y artefactos versionados
-dvc pull
+dvc pull data/raw/obesity_estimation_modified.csv.dvc
 
 # Ejecutar todo el pipeline
 dvc repro
