@@ -64,7 +64,7 @@ El pipeline facilita la reproducibilidad completa del experimento, desde los dat
 3. Instala las dependencias:
 
    ```bash
-   pip install [dependencias]
+   pip install -r requirements.txt
    ```
 
 4. Asegúrate de tener configurado **DVC**:
@@ -81,6 +81,9 @@ El proyecto usa **DVC** para versionar datos y modelos de manera reproducible.
 El flujo de trabajo básico es:
 
 ```bash
+# Copiar el archivo .dvc/config.local
+cp ~/somepath/config.local .dvc/config.local
+
 # Descargar los datos y artefactos versionados
 dvc pull data/raw/obesity_estimation_modified.csv.dvc
 
