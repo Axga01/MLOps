@@ -1,13 +1,13 @@
 schema: '2.0'
 stages:
   prepare:
-    cmd: python src/scripts/01_cleaning.py
+    cmd: python src/data/make_dataset.py
     deps:
     - path: data/raw/obesity_estimation_modified.csv
       hash: md5
       md5: a3f3a840683ff115b8853e992200ba97
       size: 290776
-    - path: src/scripts/01_cleaning.py
+    - path: src/data/make_dataset.py
       hash: md5
       md5: 0377418bb47893c82ab5174f96bef285
       size: 8808
@@ -17,13 +17,13 @@ stages:
       md5: 471495c875d4fba5f78fd31e631ab939
       size: 262026
   eda:
-    cmd: python src/scripts/02_eda_manual.py
+    cmd: python src/visualization/eda_manual.py
     deps:
     - path: data/processed/obesity_estimation_clean.csv
       hash: md5
       md5: 471495c875d4fba5f78fd31e631ab939
       size: 262026
-    - path: src/scripts/02_eda_manual.py
+    - path: src/visualization/eda_manual.py
       hash: md5
       md5: ac3730aac4389ea8d1ba75f88c81b5d8
       size: 7313
@@ -34,44 +34,44 @@ stages:
       size: 3526900
       nfiles: 32
   preprocessing:
-    cmd: python src/scripts/03_preprocessing.py
+    cmd: python src/data/preprocess_dataset.py
     deps:
     - path: data/processed/obesity_estimation_clean.csv
       hash: md5
       md5: 471495c875d4fba5f78fd31e631ab939
       size: 262026
-    - path: src/scripts/03_preprocessing.py
+    - path: src/data/preprocess_dataset.py
       hash: md5
-      md5: f1d5a76638c3eb91b7d2676095d3c3af
-      size: 5677
+      md5: d6575b37129234272a603ef86fb5db72
+      size: 5676
     outs:
-    - path: data/prepared/preprocessor.pkl
+    - path: data/interim/preprocessor.pkl
       hash: md5
       md5: 0bd7621b8bedb64c35a3cdd654ae1d66
       size: 4442
-    - path: data/prepared/test_prepared.csv
+    - path: data/interim/test_prepared.csv
       hash: md5
       md5: ec6133fa360c795bc3b722b013a98e6d
       size: 189492
-    - path: data/prepared/train_prepared.csv
+    - path: data/interim/train_prepared.csv
       hash: md5
       md5: 512dc6824500027a2d312c97e64d319f
       size: 440837
   training:
-    cmd: python src/scripts/04_training.py
+    cmd: python src/models/train_model.py
     deps:
-    - path: data/prepared/test_prepared.csv
+    - path: data/interim/test_prepared.csv
       hash: md5
       md5: ec6133fa360c795bc3b722b013a98e6d
       size: 189492
-    - path: data/prepared/train_prepared.csv
+    - path: data/interim/train_prepared.csv
       hash: md5
       md5: 512dc6824500027a2d312c97e64d319f
       size: 440837
-    - path: src/scripts/04_training.py
+    - path: src/models/train_model.py
       hash: md5
-      md5: 1615a7d576e8ba5b771c66718634e592
-      size: 8837
+      md5: 0c29c1f695fa63a0ce6b09114122029d
+      size: 8836
     outs:
     - path: models/best_model.pkl
       hash: md5

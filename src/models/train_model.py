@@ -58,7 +58,7 @@ import warnings
 
 
 # Configuración inicial
-DATA_DIR = "data/prepared"
+DATA_DIR = "data/interim"
 MLFLOW_TRACKING_URI = "mlruns"
 EXPERIMENT_NAME = "Obesity_Classification"
 
