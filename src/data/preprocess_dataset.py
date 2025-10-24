@@ -48,7 +48,7 @@ import os
 # Configuración inicial
 RANDOM_STATE = 42
 DATA_PATH = "data/processed/obesity_estimation_clean.csv"
-OUTPUT_DIR = "data/prepared"
+OUTPUT_DIR = "data/interim"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Carga del dataset limpio
