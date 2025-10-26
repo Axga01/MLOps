@@ -3,4 +3,5 @@ mlruns/
 mlartifacts/
 __pycache__/
 *.log
+/models/
 

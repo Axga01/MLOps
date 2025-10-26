@@ -1,6 +1,6 @@
 stages:
   prepare:
-    cmd: python src/data/make_dataset.py
+    cmd: PYTHONPATH=. python src/data/make_dataset.py
     deps:
       - data/raw/obesity_estimation_modified.csv
       - src/data/make_dataset.py
@@ -8,15 +8,15 @@ stages:
       - data/processed/obesity_estimation_clean.csv
 
   eda:
-    cmd: python src/visualization/eda_manual.py
+    cmd: PYTHONPATH=. python src/visualization/eda.py
     deps:
       - data/processed/obesity_estimation_clean.csv
-      - src/visualization/eda_manual.py
+      - src/visualization/eda.py
     outs:
       - reports/figures
 
   preprocessing:
-    cmd: python src/data/preprocess_dataset.py
+    cmd: PYTHONPATH=. python src/data/preprocess_dataset.py
     deps:
       - data/processed/obesity_estimation_clean.csv
       - src/data/preprocess_dataset.py
@@ -24,17 +24,26 @@ stages:
       - data/interim/train_prepared.csv
       - data/interim/test_prepared.csv
       - data/interim/preprocessor.pkl
+      - data/interim/class_distribution.csv
 
   training:
-    cmd: python src/models/train_model.py
+    cmd: PYTHONPATH=. python src/models/train_model.py
     deps:
       - data/interim/train_prepared.csv
-      - data/interim/test_prepared.csv
       - src/models/train_model.py
+      - src/models/utils.py
     outs:
-      - models/best_model.pkl
+      - models/
+
+  evaluation:
+    cmd: PYTHONPATH=. python src/models/evaluate_model.py
+    deps:
+      - data/interim/test_prepared.csv
+      - models/
+      - src/models/evaluate_model.py
+      - src/models/utils.py
+    outs:
       - reports/confusion_matrix.csv
       - reports/confusion_matrix.png
     metrics:
-      - reports/model_comparison.csv
-      - reports/final_model_comparison.csv
+      - reports/evaluation_results.csv
