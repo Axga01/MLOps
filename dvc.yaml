@@ -1,40 +1,49 @@
 stages:
   prepare:
-    cmd: python src/data/make_dataset.py
+    cmd: PYTHONPATH=. python obesity_estimator/dataset.py
     deps:
       - data/raw/obesity_estimation_modified.csv
-      - src/data/make_dataset.py
+      - obesity_estimator/dataset.py
     outs:
       - data/processed/obesity_estimation_clean.csv
 
   eda:
-    cmd: python src/visualization/eda_manual.py
+    cmd: PYTHONPATH=. python obesity_estimator/plots.py
     deps:
       - data/processed/obesity_estimation_clean.csv
-      - src/visualization/eda_manual.py
+      - obesity_estimator/plots.py
     outs:
       - reports/figures
 
   preprocessing:
-    cmd: python src/data/preprocess_dataset.py
+    cmd: PYTHONPATH=. python obesity_estimator/features.py
     deps:
       - data/processed/obesity_estimation_clean.csv
-      - src/data/preprocess_dataset.py
+      - obesity_estimator/features.py
     outs:
       - data/interim/train_prepared.csv
       - data/interim/test_prepared.csv
       - data/interim/preprocessor.pkl
+      - data/interim/class_distribution.csv
 
   training:
-    cmd: python src/models/train_model.py
+    cmd: PYTHONPATH=. python obesity_estimator/modeling/train.py
     deps:
       - data/interim/train_prepared.csv
-      - data/interim/test_prepared.csv
-      - src/models/train_model.py
+      - obesity_estimator/modeling/train.py
+      - obesity_estimator/utils.py
     outs:
-      - models/best_model.pkl
+      - models/
+
+  evaluation:
+    cmd: PYTHONPATH=. python obesity_estimator/modeling/predict.py
+    deps:
+      - data/interim/test_prepared.csv
+      - models/
+      - obesity_estimator/modeling/predict.py
+      - obesity_estimator/utils.py
+    outs:
       - reports/confusion_matrix.csv
       - reports/confusion_matrix.png
     metrics:
-      - reports/model_comparison.csv
-      - reports/final_model_comparison.csv
+      - reports/evaluation_results.csv
