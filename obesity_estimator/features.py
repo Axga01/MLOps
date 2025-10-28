@@ -19,7 +19,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import joblib
 
-from src.config import (
+from obesity_estimator.config import (
     PROCESSED_FILEPATH,
     TRAIN_FILEPATH,
     TEST_FILEPATH,

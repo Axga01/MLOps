@@ -1,32 +1,32 @@
 schema: '2.0'
 stages:
   prepare:
-    cmd: PYTHONPATH=. python src/data/make_dataset.py
+    cmd: PYTHONPATH=. python obesity_estimator/dataset.py
     deps:
     - path: data/raw/obesity_estimation_modified.csv
       hash: md5
       md5: a3f3a840683ff115b8853e992200ba97
       size: 290776
-    - path: src/data/make_dataset.py
+    - path: obesity_estimator/dataset.py
       hash: md5
-      md5: df6f1bc0e7e6e87818e6ebcd4409d7d9
-      size: 3932
+      md5: 77a610f8d9cb49de3f974cbf758d6b04
+      size: 3946
     outs:
     - path: data/processed/obesity_estimation_clean.csv
       hash: md5
       md5: 05c7db71a32f3757337ad785ef3dbd2e
       size: 259884
   eda:
-    cmd: PYTHONPATH=. python src/visualization/eda.py
+    cmd: PYTHONPATH=. python obesity_estimator/plots.py
     deps:
     - path: data/processed/obesity_estimation_clean.csv
       hash: md5
       md5: 05c7db71a32f3757337ad785ef3dbd2e
       size: 259884
-    - path: src/visualization/eda.py
+    - path: obesity_estimator/plots.py
       hash: md5
-      md5: 417ef1f80ad360427b45be63f28a4331
-      size: 5637
+      md5: 7fbee8a64bafbb6ec2044e0099c5317b
+      size: 5651
     outs:
     - path: reports/figures
       hash: md5
@@ -34,16 +34,16 @@ stages:
       size: 1117733
       nfiles: 30
   preprocessing:
-    cmd: PYTHONPATH=. python src/data/preprocess_dataset.py
+    cmd: PYTHONPATH=. python obesity_estimator/features.py
     deps:
     - path: data/processed/obesity_estimation_clean.csv
       hash: md5
       md5: 05c7db71a32f3757337ad785ef3dbd2e
       size: 259884
-    - path: src/data/preprocess_dataset.py
+    - path: obesity_estimator/features.py
       hash: md5
-      md5: 87f7fe0540b6c078c069f1e7b3916e6b
-      size: 5084
+      md5: 44c5cda0b6cb75bfd347cf8b5dfa1f99
+      size: 5098
     outs:
     - path: data/interim/class_distribution.csv
       hash: md5
@@ -62,17 +62,17 @@ stages:
       md5: 7d501cd2bb193772eaf16d5e89016bef
       size: 459202
   training:
-    cmd: PYTHONPATH=. python src/models/train_model.py
+    cmd: PYTHONPATH=. python obesity_estimator/modeling/train.py
     deps:
     - path: data/interim/train_prepared.csv
       hash: md5
       md5: 7d501cd2bb193772eaf16d5e89016bef
       size: 459202
-    - path: src/models/train_model.py
+    - path: obesity_estimator/modeling/train.py
       hash: md5
-      md5: 3951169f2b24714c522042f4c28a021b
-      size: 3506
-    - path: src/models/utils.py
+      md5: 23b8bedb3afc7aa7791eb569b13f7f9a
+      size: 3527
+    - path: obesity_estimator/utils.py
       hash: md5
       md5: 49282ea26f7912787da1f31d5234b94b
       size: 1598
@@ -83,7 +83,7 @@ stages:
       size: 8073315
       nfiles: 4
   evaluation:
-    cmd: PYTHONPATH=. python src/models/evaluate_model.py
+    cmd: PYTHONPATH=. python obesity_estimator/modeling/predict.py
     deps:
     - path: data/interim/test_prepared.csv
       hash: md5
@@ -94,11 +94,11 @@ stages:
       md5: 5c756db92b86cec6741f38c8c76be3fc.dir
       size: 8073315
       nfiles: 4
-    - path: src/models/evaluate_model.py
+    - path: obesity_estimator/modeling/predict.py
       hash: md5
-      md5: 4ed8041858489991774711d7e7f1cd2f
-      size: 2876
-    - path: src/models/utils.py
+      md5: 32b95640744313018b6fa51811cded33
+      size: 2897
+    - path: obesity_estimator/utils.py
       hash: md5
       md5: 49282ea26f7912787da1f31d5234b94b
       size: 1598

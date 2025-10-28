@@ -14,7 +14,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from pandas.api.types import CategoricalDtype
 
-from src.config import PROCESSED_FILEPATH, FIGURES_DIR, NUMERIC_COLS, CATEGORICAL_COLS, BINARY_COLS, TARGET_COL
+from obesity_estimator.config import PROCESSED_FILEPATH, FIGURES_DIR, NUMERIC_COLS, CATEGORICAL_COLS, BINARY_COLS, TARGET_COL
 
 
 # ------------------------------- #

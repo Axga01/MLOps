@@ -8,8 +8,8 @@ Evalúa los modelos entrenados sobre el conjunto de prueba, genera métricas y m
 # ----------------- #
 # --- LIBRERÍAS --- #
 # ----------------- #
-from src.config import TEST_FILEPATH, MODELS_DIR, REPORTS_DIR
-from src.models.utils import evaluate_model
+from obesity_estimator.config import TEST_FILEPATH, MODELS_DIR, REPORTS_DIR
+from obesity_estimator.utils import evaluate_model
 
 import joblib
 import logging

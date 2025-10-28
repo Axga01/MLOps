@@ -13,11 +13,11 @@ from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVC
-from src.config import (
+from obesity_estimator.config import (
     RANDOM_STATE, TRAIN_FILEPATH, MODELS_DIR,
     MLFLOW_TRACKING_URI, EXPERIMENT_NAME
 )
-from src.models.utils import configure_mlflow
+from obesity_estimator.utils import configure_mlflow
 
 import joblib
 import logging

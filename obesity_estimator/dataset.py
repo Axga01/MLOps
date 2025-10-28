@@ -12,7 +12,7 @@ import pandas as pd
 import numpy as np
 import logging
 from pathlib import Path
-from src.config import RAW_FILEPATH, PROCESSED_FILEPATH, LOG_LEVEL
+from obesity_estimator.config import RAW_FILEPATH, PROCESSED_FILEPATH, LOG_LEVEL
 
 
 # ------------------------------- #
