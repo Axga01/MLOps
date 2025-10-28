@@ -1,5 +1,5 @@
 """
-train_model.py
+train.py
 ---------------
 Entrena y ajusta múltiples modelos supervisados, registrando métricas y parámetros en MLflow.
 """

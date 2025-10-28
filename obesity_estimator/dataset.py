@@ -1,5 +1,5 @@
 """
-make_dataset.py
+dataset.py
 ---------------
 Carga, limpia y guarda la versión procesada del dataset de obesidad.
 """

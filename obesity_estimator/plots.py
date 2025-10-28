@@ -1,5 +1,5 @@
 """
-eda.py
+plots.py
 -----------------
 Realiza la operación de EDA sobre el dataset limpio.
 """

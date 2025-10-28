@@ -1,5 +1,5 @@
 """
-evaluate_model.py
+predict.py
 -----------------
 Evalúa los modelos entrenados sobre el conjunto de prueba, genera métricas y matriz de confusión.
 """
