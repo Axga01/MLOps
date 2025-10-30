@@ -1,0 +1,62 @@
+data:
+  X_train_path: data/prepared/train_prepared.csv
+  X_test_path: data/prepared/test_prepared.csv
+  y_train_path: data/prepared/y_train.csv
+  y_test_path: data/prepared/y_test.csv
+  target_name: NObeyesdad
+
+cv:
+  n_splits: 5
+  random_state: 42
+  shuffle: true
+
+search:
+  # modos: "auto" | "grid" | "random"
+  mode: auto
+  # si mode=auto y combinaciones > max_combinations -> randomized
+  max_combinations: 250
+  # para randomized
+  n_iter: 40
+  # scoring y recursos
+  scoring: f1_macro
+  n_jobs: -1
+  verbose: 1
+  # overrides por modelo (opcional): grid|random|auto
+  per_model:
+    logistic_regression: auto
+    random_forest: auto
+    hist_gradient_boosting: auto
+    svc_rbf: auto
+
+models:
+  logistic_regression: true
+  random_forest: true
+  hist_gradient_boosting: true
+  svc_rbf: true
+
+grids:
+  logistic_regression:
+    C: [0.5, 1.0, 2.0, 5.0]
+    penalty: ["l2"]
+    solver: ["lbfgs"]
+    max_iter: [200, 400]
+    class_weight: [null, "balanced"]
+
+  random_forest:
+    n_estimators: [300, 600, 1000]
+    max_depth: [null, 12, 24, 36]
+    min_samples_split: [2, 5, 10]
+    min_samples_leaf: [1, 2, 4]
+    class_weight: [null, "balanced_subsample"]
+
+  hist_gradient_boosting:
+    learning_rate: [0.03, 0.05, 0.1]
+    max_depth: [None, 8, 12]
+    max_leaf_nodes: [31, 63, 127]
+    min_samples_leaf: [20, 50, 100]
+    l2_regularization: [0.0, 0.1, 0.5]
+
+  svc_rbf:
+    C: [0.5, 1.0, 2.0, 5.0]
+    gamma: ["scale", 0.1, 0.01]
+    probability: [true]
