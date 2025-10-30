@@ -1,7 +1,0 @@
-# Desde tu repo actual
-git remote add fuente https://github.com/TecMNA2025MLOpsEq25/mna-mlops-sep2025-eq25.git
-git fetch fuente
-git checkout -b importar-eq25
-git merge --allow-unrelated-histories fuente/main
-# Resuelve conflictos si aparecen, luego:
-git commit
