@@ -1,0 +1,8 @@
+.DS_Store
+mlruns/
+mlartifacts/
+__pycache__/
+*.log
+/models/
+
+/models

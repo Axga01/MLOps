@@ -1,0 +1,49 @@
+stages:
+  prepare:
+    cmd: PYTHONPATH=. python obesity_estimator/dataset.py
+    deps:
+      - data/raw/obesity_estimation_modified.csv
+      - obesity_estimator/dataset.py
+    outs:
+      - data/processed/obesity_estimation_clean.csv
+
+  eda:
+    cmd: PYTHONPATH=. python obesity_estimator/plots.py
+    deps:
+      - data/processed/obesity_estimation_clean.csv
+      - obesity_estimator/plots.py
+    outs:
+      - reports/figures
+
+  preprocessing:
+    cmd: PYTHONPATH=. python obesity_estimator/features.py
+    deps:
+      - data/processed/obesity_estimation_clean.csv
+      - obesity_estimator/features.py
+    outs:
+      - data/interim/train_prepared.csv
+      - data/interim/test_prepared.csv
+      - data/interim/preprocessor.pkl
+      - data/interim/class_distribution.csv
+
+  training:
+    cmd: PYTHONPATH=. python obesity_estimator/modeling/train.py
+    deps:
+      - data/interim/train_prepared.csv
+      - obesity_estimator/modeling/train.py
+      - obesity_estimator/utils.py
+    outs:
+      - models/
+
+  evaluation:
+    cmd: PYTHONPATH=. python obesity_estimator/modeling/predict.py
+    deps:
+      - data/interim/test_prepared.csv
+      - models/
+      - obesity_estimator/modeling/predict.py
+      - obesity_estimator/utils.py
+    outs:
+      - reports/confusion_matrix.csv
+      - reports/confusion_matrix.png
+    metrics:
+      - reports/evaluation_results.csv
