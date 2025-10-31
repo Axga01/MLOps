@@ -67,7 +67,7 @@ def train_models(X_train, y_train, scoring="f1_macro"):
             mlflow.log_params(grid.best_params_)
             mlflow.log_metric(f"best_cv_{scoring}", grid.best_score_)
             signature = infer_signature(X_train, grid.best_estimator_.predict(X_train))
-            mlflow.sklearn.log_model(grid.best_estimator_, name=f"{name}_model", signature=signature)
+            mlflow.sklearn.log_model(grid.best_estimator_, artifact_path=f"{name}_model", signature=signature)
 
     return best_models
 
