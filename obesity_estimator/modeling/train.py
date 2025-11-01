@@ -253,7 +253,7 @@ def main():
     pd.DataFrame(results).to_csv(root / "reports" / "final_model_comparison.csv", index=False)
     plot_confusion_matrix(y_test, y_pred_best, labels_order, root / "reports" / "figures" / "confusion_matrix.png")
 
-    print(f"\n✅ Entrenamiento finalizado. Mejor modelo: {best['name']} ({best['score']:.4f})")
+    print(f"\n Entrenamiento finalizado. Mejor modelo: {best['name']} ({best['score']:.4f})")
 
 if __name__ == "__main__":
     main()
