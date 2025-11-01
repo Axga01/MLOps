@@ -6,3 +6,9 @@ __pycache__/
 /models/
 
 /models
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.dvc/tmp/
+mlruns/
