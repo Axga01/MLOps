@@ -25,13 +25,13 @@ stages:
       size: 259769
     - path: obesity_estimator/plots.py
       hash: md5
-      md5: ae7654230f7285c99cf973c49dc4b585
-      size: 5653
+      md5: dcadabebbe0aad06fcec479b08cc972f
+      size: 6268
     outs:
-    - path: reports/figures
+    - path: reports/figures/eda
       hash: md5
-      md5: 74aeec70afa65d1fcfc7d5a79cd26b46.dir
-      size: 1106294
+      md5: 288be26971fc3431d6bfdd52bce045c9.dir
+      size: 2193003
       nfiles: 30
   preprocessing:
     cmd: PYTHONPATH=. python obesity_estimator/features.py
@@ -51,7 +51,7 @@ stages:
       size: 227
     - path: data/interim/preprocessor.pkl
       hash: md5
-      md5: b213650345f4ac2f189d5180fa8e1336
+      md5: 403c0969738a67eb56d5ba2d308fa746
       size: 4442
     - path: data/interim/test_prepared.csv
       hash: md5
@@ -64,24 +64,31 @@ stages:
   training:
     cmd: PYTHONPATH=. python obesity_estimator/modeling/train.py
     deps:
+    - path: data/interim/test_prepared.csv
+      hash: md5
+      md5: 2149288e43456c4e7296bbe098c47f7a
+      size: 188027
     - path: data/interim/train_prepared.csv
       hash: md5
       md5: b05d60c35850172c29d850e894d18d11
       size: 437385
     - path: obesity_estimator/modeling/train.py
       hash: md5
-      md5: e80e3ca983e3af6269aa236863723fa6
-      size: 3530
-    - path: obesity_estimator/utils.py
-      hash: md5
-      md5: 49282ea26f7912787da1f31d5234b94b
-      size: 1598
+      md5: 63bea5d3b3ab89371d7b9259a3688577
+      size: 9546
     outs:
-    - path: models/
+    - path: models/best_model.joblib
       hash: md5
-      md5: f538252f2826818438ee059978d78a7c.dir
-      size: 7637411
-      nfiles: 4
+      md5: af269aec03c1e052056f4386731ea806
+      size: 2109264
+    - path: reports/figures/confusion_matrix.png
+      hash: md5
+      md5: 2ad26bbcdbc3754b38c8a4daefd6960b
+      size: 111609
+    - path: reports/metrics.json
+      hash: md5
+      md5: 2b88de0936c9963fa4a4e03a434bc401
+      size: 122
   evaluation:
     cmd: PYTHONPATH=. python obesity_estimator/modeling/predict.py
     deps:
@@ -91,13 +98,13 @@ stages:
       size: 188027
     - path: models/
       hash: md5
-      md5: f538252f2826818438ee059978d78a7c.dir
-      size: 7637411
-      nfiles: 4
+      md5: 5684e55b81532284d1e7b33d33af0ac5.dir
+      size: 2109264
+      nfiles: 1
     - path: obesity_estimator/modeling/predict.py
       hash: md5
-      md5: 76a571b745686afa8f49fda431810431
-      size: 2890
+      md5: 9e4f10af9e563802499583fbff93ee2a
+      size: 6472
     - path: obesity_estimator/utils.py
       hash: md5
       md5: 49282ea26f7912787da1f31d5234b94b
@@ -105,13 +112,13 @@ stages:
     outs:
     - path: reports/confusion_matrix.csv
       hash: md5
-      md5: 739ba9e4081a3cbbbf79565f5637163c
+      md5: 17665ac30af2e303909518adec80b237
       size: 349
     - path: reports/confusion_matrix.png
       hash: md5
-      md5: 1239ac123dd09c468b730869d3613520
-      size: 37902
+      md5: 39a8765a5e99bafe22019ec594651c6d
+      size: 108963
     - path: reports/evaluation_results.csv
       hash: md5
-      md5: 77c4ccb9247243675aa3f3ea18e57252
-      size: 751
+      md5: fab8730361734cf8c8fc6840ed92e863
+      size: 277
