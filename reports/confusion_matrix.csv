@@ -1,0 +1,8 @@
+,insufficient_weight,normal_weight,obesity_type_i,obesity_type_ii,obesity_type_iii,overweight_level_i,overweight_level_ii
+insufficient_weight,78,2,0,0,0,0,0
+normal_weight,2,81,0,0,0,2,0
+obesity_type_i,0,0,103,0,0,1,2
+obesity_type_ii,0,0,1,88,0,0,0
+obesity_type_iii,0,0,0,1,96,0,0
+overweight_level_i,0,5,0,0,0,76,2
+overweight_level_ii,0,0,2,0,0,0,85
