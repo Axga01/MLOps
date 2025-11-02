@@ -122,3 +122,48 @@ stages:
       hash: md5
       md5: fab8730361734cf8c8fc6840ed92e863
       size: 277
+  model_plots:
+    cmd: PYTHONPATH=. python obesity_estimator/modeling/plot_curves.py
+    deps:
+    - path: data/interim/test_prepared.csv
+      hash: md5
+      md5: 2149288e43456c4e7296bbe098c47f7a
+      size: 188027
+    - path: models/best_model.joblib
+      hash: md5
+      md5: af269aec03c1e052056f4386731ea806
+      size: 2109264
+    - path: models/hist_gradient_boosting_best.joblib
+      hash: md5
+      md5: af269aec03c1e052056f4386731ea806
+      size: 2109264
+    - path: models/logistic_regression_best.joblib
+      hash: md5
+      md5: f7e7e43fc5825834a25e3338af292532
+      size: 2975
+    - path: models/random_forest_best.joblib
+      hash: md5
+      md5: d049bfcbe0535587f8c7f899d349eb50
+      size: 58174241
+    - path: models/svc_rbf_best.joblib
+      hash: md5
+      md5: 042728930002ba915b0cc412d76c8b36
+      size: 231339
+    - path: obesity_estimator/modeling/plot_curves.py
+      hash: md5
+      md5: f79e7f11371561f53582deb44ee43444
+      size: 8897
+    outs:
+    - path: reports/figures/models
+      hash: md5
+      md5: 0d471f6dee0717994e070cdf4c654ce4.dir
+      size: 1468372
+      nfiles: 22
+    - path: reports/pr_auc_by_model.csv
+      hash: md5
+      md5: 38b85872cea72538f4bf52fabe324216
+      size: 186
+    - path: reports/roc_auc_by_model.csv
+      hash: md5
+      md5: 648087303f95748f79a6721bb8a93646
+      size: 190

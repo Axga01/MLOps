@@ -5,3 +5,5 @@
 /confusion_matrix.csv
 /evaluation_results.csv
 /metrics.json
+/roc_auc_by_model.csv
+/pr_auc_by_model.csv
