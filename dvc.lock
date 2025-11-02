@@ -74,8 +74,8 @@ stages:
       size: 437385
     - path: obesity_estimator/modeling/train.py
       hash: md5
-      md5: 63bea5d3b3ab89371d7b9259a3688577
-      size: 9546
+      md5: 12dc4d60101863b2d8fd981aae87c947
+      size: 9660
     outs:
     - path: models/best_model.joblib
       hash: md5

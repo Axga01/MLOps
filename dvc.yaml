@@ -52,3 +52,19 @@ stages:
       - reports/confusion_matrix.png
     metrics:
       - reports/evaluation_results.csv
+
+  model_plots:
+    cmd: PYTHONPATH=. python obesity_estimator/modeling/plot_curves.py
+    deps:
+      - obesity_estimator/modeling/plot_curves.py
+      - data/interim/test_prepared.csv
+      - models/best_model.joblib
+      - models/logistic_regression_best.joblib
+      - models/random_forest_best.joblib
+      - models/hist_gradient_boosting_best.joblib
+      - models/svc_rbf_best.joblib
+    outs:
+      - reports/figures/models
+      - reports/roc_auc_by_model.csv
+      - reports/pr_auc_by_model.csv
+

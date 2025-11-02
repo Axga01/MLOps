@@ -24,6 +24,8 @@ import numpy as np
 import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
+import joblib
+from joblib import dump
 
 from sklearn.metrics import (
     f1_score, accuracy_score, precision_score, recall_score,
@@ -227,6 +229,8 @@ def main():
         print(f"\n=== Buscando hiperparámetros para: {name} ===")
         search = make_search(model, grids[name], CFG, cv, name)
         search.fit(X_train, y_train)
+        dump(search.best_estimator_, root / "models" / f"{name}_best.joblib")
+
         y_pred = search.predict(X_test)
         f1 = f1_score(y_test, y_pred, average="macro")
         results.append({
